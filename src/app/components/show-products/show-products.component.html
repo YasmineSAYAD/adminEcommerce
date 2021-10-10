@@ -1,0 +1,51 @@
+<h1>List of products</h1>
+<button class="btn btn-outline btn-sm" (click)="addProduct()">Add product</button>
+<!-- delete modal -->
+<app-delete-product-modal
+*ngIf="delete"
+[product]="productToBeDelete"
+(cancel)="handleCancelDelete()"
+(confirm)="handleConfirmDelete()"
+>
+</app-delete-product-modal>
+<!-- delete modal -->
+
+<!-- add or edit product modal -->
+<app-add-or-edit-product-modal *ngIf="productModalOpen"
+[product]="selectedProduct"
+(finish)="handleFinish($event)">
+</app-add-or-edit-product-modal>
+<!-- end add or edit product modal -->
+<clr-datagrid>
+  <clr-dg-column [style.width.px]="10">ID</clr-dg-column>
+  <clr-dg-column [clrDgField]="'name'" [style.width.px]="100">Name</clr-dg-column>
+  <clr-dg-column [clrDgField]="'description'" [style.width.px]="400">Description</clr-dg-column>
+  <clr-dg-column [clrDgField]="'price'" [style.width.px]="10">Price</clr-dg-column>
+  <clr-dg-column [clrDgField]="'stock'" [style.width.px]="10">Stock</clr-dg-column>
+  <clr-dg-column [clrDgField]="'image'" [style.width.px]="100">Image</clr-dg-column>
+
+  <clr-dg-row *clrDgItems="let product of products">
+    <!-- Actions -->
+    <clr-dg-action-overflow>
+      <button class="action-item edit" (click)="onEdit(product)">Edit</button>
+      <button class="action-item delete" (click)="onDelete(product)">Delete</button>
+    </clr-dg-action-overflow>
+    <!-- End Actions -->
+    <clr-dg-cell> {{product.idProduct}}</clr-dg-cell>
+    <clr-dg-cell>{{product.name}}</clr-dg-cell>
+    <clr-dg-cell>{{product.description}}</clr-dg-cell>
+    <clr-dg-cell>£{{product.price}}</clr-dg-cell>
+    <clr-dg-cell>{{product.stock}} In stock</clr-dg-cell>
+    <clr-dg-cell><img width="100" [src]="baseUrlImage+product.image" [alt]="product.name"/></clr-dg-cell>
+ </clr-dg-row>
+ <clr-dg-footer>
+  <clr-dg-pagination #pagination [clrDgPageSize]="8">
+    <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]">Products per page</clr-dg-page-size>
+    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} of {{pagination.totalItems}} products
+  </clr-dg-pagination>
+ </clr-dg-footer>
+</clr-datagrid>
+
+
+
+

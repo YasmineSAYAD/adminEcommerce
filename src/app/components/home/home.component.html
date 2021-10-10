@@ -1,0 +1,22 @@
+<clr-main-container>
+  <clr-header>
+    <div class="header-nav" [clr-nav-level]="1">
+      <div class="branding">
+        <span class="title">Admin space</span>
+      </div>
+    </div>
+  </clr-header>
+  <div class="content-container">
+    <main class="content-area">
+      <app-show-products [products]="products"></app-show-products>
+    </main>
+    <nav class="sidenav" [clr-nav-level]="2">
+      <section class="sidenav-content">
+        <a href="" class="nav-link active">Products</a>
+        <a href="" class="nav-link">Orders</a>
+        <a href="" class="nav-link">Customers</a>
+        <a href="" class="nav-link">Product category</a>
+      </section>
+    </nav>
+  </div>
+</clr-main-container>
